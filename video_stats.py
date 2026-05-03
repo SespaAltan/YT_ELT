@@ -1,7 +1,12 @@
 import requests
 import json
 
-API_KEY = "AIzaSyCANPh8UqMwL8y9-FWa9c4C_cdrbsauZmk"
+import os
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path="./.env")
+
+API_KEY = os.getenv("API_KEY")
 
 CHANNEL_HANDLE = "MrBeast"
 
