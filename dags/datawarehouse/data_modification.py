@@ -5,7 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 table = "yt_api"
 
-def insert_row(cur,conn,schema,row):
+def insert_rows(cur,conn,schema,row):
 
     try:
 
