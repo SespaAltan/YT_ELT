@@ -66,12 +66,11 @@ with DAG(
     description='DAG to check the data quality on both layers in the db',
     schedule='0 16 * * *',
     catchup=False
-) as dag_update:
+) as dag_quality:
     
     # Define tasks
     soda_validate_staging = yt_elt_data_quality(staging_schema)
     soda_validate_core = yt_elt_data_quality(core_schema)
 
     # Define dependencies
-    update_staging >> update_core
-    
+    soda_validate_staging >> soda_validate_core
