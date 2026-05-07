@@ -34,7 +34,7 @@ def insert_row(cur,conn,schema,row):
         logger.info(f"Inserted row with Video_ID: {row[video_id]}")
 
     except Exception as e:
-        logger.error(f"Error inserting row with Video_ID": {row[video_id]})
+        logger.error(f"Error inserting row with Video_ID: {row[video_id]}")
         raise e
 
 def update_rows(cur, conn, schema, row):
