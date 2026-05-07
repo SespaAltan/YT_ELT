@@ -12,7 +12,7 @@ table = "yt_api"
 @task
 def staging_table():
 
-    schema = 'staging'
+    schema = "staging"
 
     conn, cur = None, None
 
@@ -29,26 +29,26 @@ def staging_table():
 
         for row in YT_data:
 
-            if len(table_ids) ==0:
-                insert_rows(cur, conn, schema,row)
+            if len(table_ids) == 0:
+                insert_rows(cur, conn, schema, row)
 
             else:
                 if row['video_id'] in table_ids:
-                    update_rows(cur, conn, schema,row)
+                    update_rows(cur, conn, schema, row)
                 else:
-                    insert_rows(cur,conn,schema,row)
+                    insert_rows(cur, conn,schema, row)
 
         ids_in_json = {row['video_id'] for row in YT_data}
 
         ids_to_delete = set(table_ids) - ids_in_json
 
         if ids_to_delete:
-            delete_rows(cur,conn,schema,row)
+            delete_rows(cur, conn, schema, ids_to_delete)
 
         logger.info(f"{schema} table update completed")
 
     except Exception as e:
-        logger.error(f"An error occurred during the updateof {schema} table: {e}")
+        logger.error(f"An error occurred during the update of {schema} table: {e}")
         raise e
 
     finally:
@@ -72,7 +72,7 @@ def core_table():
 
         current_video_ids = set()
 
-        cur.execute("SELECT * FROM staging.{table};")
+        cur.execute(f"SELECT * FROM staging.{table};")
         rows = cur.fetchall()
 
         for row in rows:
